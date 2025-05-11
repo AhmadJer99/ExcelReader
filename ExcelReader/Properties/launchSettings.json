@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ExcelReader": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\AhmadJerjees\\source\\repos\\ExcelReader\\ExcelReader"
+    }
+  }
+}
