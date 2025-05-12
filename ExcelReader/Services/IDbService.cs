@@ -1,11 +1,12 @@
-﻿namespace ExcelReader.Services;
+﻿using ExcelReader.Models;
+namespace ExcelReader.Services;
 
-internal interface IDbService
+public interface IDbService
 {
-    Task<> DbInitialize();
-    Task<List<T>> GetAllAsync<T>();
-    Task<T> GetByIdAsync<T>(int id);
-    Task AddAsync<T>(T entity);
-    Task UpdateAsync<T>(T entity);
-    Task DeleteAsync<T>(int id);
+    Task DbInitialize();
+    Task<List<Population>> GetAllAsync();
+    Task<Population> GetByIdAsync(int id);
+    Task AddAsync(Population entity);
+    Task UpdateAsync(Population entity);
+    Task DeleteAsync(int id);
 }

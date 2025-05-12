@@ -1,11 +1,11 @@
-﻿
+﻿using ExcelReader.Models;
 
 namespace ExcelReader.Services;
 
-internal interface IExcelService
+public interface IExcelService
 {
-    Task<List<T>> ReadExcelFileAsync(string filePath);
-    Task WriteExcelFileAsync(string filePath, List<T> data);
-    Task<List<T>> ReadExcelFileWithHeadersAsync(string filePath, bool hasHeaders);
-    Task WriteExcelFileWithHeadersAsync(string filePath, List<T> data, bool hasHeaders);
+    Task<List<Population>> ReadExcelFileAsync(string filePath);
+    Task WriteExcelFileAsync(string filePath, List<Population> data);
+    Task<List<Population>> ReadExcelFileWithHeadersAsync(string filePath, bool hasHeaders);
+    Task WriteExcelFileWithHeadersAsync(string filePath, List<Population> data, bool hasHeaders);
 }

@@ -1,6 +1,6 @@
 ﻿namespace ExcelReader.Models;
 
-internal class Population
+public class Population
 {
     public string? Year { get; set; }
     public string? Gender { get; set; }

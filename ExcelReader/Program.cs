@@ -1,4 +1,5 @@
-﻿using ExcelReader.Services;
+﻿using ExcelReader;
+using ExcelReader.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,9 +21,12 @@ var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
         services.AddScoped<IExcelService,ExcelService>();
+        services.AddScoped<IDbService,DbService>();
+        services.AddScoped<StartUp>();
     })
     .Build();
-
+var svc = ActivatorUtilities.CreateInstance<StartUp>(host.Services);
+await svc.ExecuteAsync();
 static void BuildConfig(IConfigurationBuilder builder)
 {
     builder.SetBasePath(Directory.GetCurrentDirectory())
