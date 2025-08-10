@@ -1,4 +1,5 @@
-﻿using ExcelReader.Models;
+﻿using System.ComponentModel;
+using ExcelReader.Models;
 using OfficeOpenXml;
 using Spectre.Console;
 
@@ -14,13 +15,39 @@ public class ExcelService : IExcelService
     }
     public Task<List<Population>> ReadExcelFileAsync(string filePath)
     {
+        List<Population> populationData = new();
         AnsiConsole.MarkupLine("[Green]Reading From Excel...[/]");
-        
+
         using (var package = new ExcelPackage(new FileInfo(@filePath))) // Loaded the Excel file.
         {
+            Console.WriteLine($"This Excel file has {package.Workbook.Worksheets.Count()} worksheet(s)");
+            Console.WriteLine($"and {package.Workbook.Worksheets[0].Cells.Count()} cells");
+            Console.WriteLine($"and {package.Workbook.Worksheets[0].Rows.Count()} Rows");
+            string year = default;
+            string gender = default;
+            int pop = default;
+            var populationSheet = package.Workbook.Worksheets[0]; // Fetching the data from the cells.
+            for (int i = 0; i < populationSheet.Rows.Count() - 1; i++)
+            {
+                Console.Write($"Row({i})\t");
+                Console.WriteLine($@"Year:{populationSheet.Cells[i + 2, 1].Value}
+                 || Gender:{populationSheet.Cells[i + 2, 2].Value} ||
+                  PopCount:{populationSheet.Cells[i + 2, 3].Value}");
 
+                year = populationSheet.Cells[i + 2, 1].Value.ToString();
+                gender = populationSheet.Cells[i + 2, 2].Value.ToString();
+                pop = Convert.ToInt32(populationSheet.Cells[i + 2, 3].Value);
+
+                populationData.Add(
+                new Population
+                {
+                    Year = year,
+                    Gender = gender,
+                    PopulationCount = pop
+                });
+            }
+            Console.WriteLine(populationData.Count());
         }
-
         throw new NotImplementedException();
     }
 
