@@ -15,10 +15,10 @@ public class StartUp
 
     public async Task ExecuteAsync()
     {
-        // await _excelService.WriteExcelFileAsync("testwrite.xlsx", [
-        //     new() {Year="2024",Gender="Male",PopulationCount=11111 }
-        // ]);
+        await _excelService.WriteExcelFileAsync("ExportedPopulation.xlsx", [
+            new() {Year="2024",Gender="Male",PopulationCount=11111 }
+        ]);
         
-        await _excelService.ReadExcelFileAsync("AmmanPopulation.xlsx");
+        // await _excelService.ReadExcelFileAsync("AmmanPopulation.xlsx");
     }
 }

@@ -6,14 +6,19 @@ namespace ExcelReader.Services;
 
 public class ExcelService : IExcelService
 {
+    
+    public ExcelService()
+    {
+        // sets the license to a commerical license.
+        ExcelPackage.License.SetNonCommercialOrganization("My Noncommercial organization");
+    }
     public Task<List<Population>> ReadExcelFileAsync(string filePath)
     {
         AnsiConsole.MarkupLine("[Green]Reading From Excel...[/]");
-        ExcelPackage.License.SetNonCommercialOrganization("My Noncommercial organization");
-
+        
         using (var package = new ExcelPackage(new FileInfo(@filePath))) // Loaded the Excel file.
         {
-        
+
         }
 
         throw new NotImplementedException();
@@ -26,8 +31,6 @@ public class ExcelService : IExcelService
 
     public async Task WriteExcelFileAsync(string filePath, List<Population> data)
     {
-        ExcelPackage.License.SetNonCommercialOrganization("My Noncommercial organization");
-
         Type type = typeof(Population);
 
         var properties = type.GetProperties();
