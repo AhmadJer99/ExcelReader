@@ -1,5 +1,6 @@
 ﻿using ExcelReader.Models;
 using OfficeOpenXml;
+using Spectre.Console;
 
 namespace ExcelReader.Services;
 
@@ -7,6 +8,14 @@ public class ExcelService : IExcelService
 {
     public Task<List<Population>> ReadExcelFileAsync(string filePath)
     {
+        AnsiConsole.MarkupLine("[Green]Reading From Excel...[/]");
+        ExcelPackage.License.SetNonCommercialOrganization("My Noncommercial organization");
+
+        using (var package = new ExcelPackage(new FileInfo(@filePath))) // Loaded the Excel file.
+        {
+        
+        }
+
         throw new NotImplementedException();
     }
 
